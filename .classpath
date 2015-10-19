@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/eislab/ipso/rockbolt/sensor/UDSClient.java|com/eislab/ipso/rockbolt/sensor/SensorClient.java|com/eislab/ipso/rockbolt/sensor/RockboltStrainSensor_Coap.java|com/eislab/ipso/rockbolt/sensor/RockboltAccRmsSensor_Coap.java" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/californium-core-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/element-connector-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/javax.json-1.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/leshan-client-cf"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/leshan-client-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/leshan-core"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
