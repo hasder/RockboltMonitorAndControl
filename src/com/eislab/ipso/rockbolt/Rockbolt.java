@@ -45,7 +45,8 @@ public class Rockbolt extends Observable {
 		historianThread = new Thread(historianAgent);
 		historianThread.start();
 
-		strainSensor = new RockboltStrainSensor("coap://" + device + "/strain", this);
+		strainSensor = new RockboltStrainSensor("coap://" + device + "/strain", this);//fake resource until real one available
+//		strainSensor = new RockboltStrainSensor("coap://" + device + "/3200/0/5500", this);//real strain resource (not yet implemented in mulle)
 		strainSensor.addObserver(alarmAgent);
 		// strainThread = new Thread(strainSensor);
 		// strainThread.start();

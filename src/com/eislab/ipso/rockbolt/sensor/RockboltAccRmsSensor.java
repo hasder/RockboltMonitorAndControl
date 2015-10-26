@@ -69,13 +69,13 @@ public class RockboltAccRmsSensor extends AbstractSensorClient {
 										if (event.equals(JsonParser.Event.END_OBJECT)) {
 											
 											//get the values gathered in the map.
-											if (objectMap.get("n").equals("accX") )
+											if (objectMap.get("n").equals("X") )
 												acc_X = Double.parseDouble(objectMap.get("v"));
-											else if (objectMap.get("n").equals("accY"))
+											else if (objectMap.get("n").equals("Y"))
 												acc_Y = Double.parseDouble(objectMap.get("v"));
-											else if (objectMap.get("n").equals("accZ"))
+											else if (objectMap.get("n").equals("Z"))
 												acc_Z = Double.parseDouble(objectMap.get("v"));
-											else if (objectMap.get("n").equals("alarm"))
+											else if (objectMap.get("n").equals("a"))
 												alarm = Integer.parseInt(objectMap.get("v"));
 											break;
 										}
@@ -98,7 +98,10 @@ public class RockboltAccRmsSensor extends AbstractSensorClient {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-					
+				
+				if ((acc_Y > 0.4) || (acc_Y < -0.4)) {
+					alarm = 2;
+				}
 							
 				if(prevAlarm != alarm) {
 					prevAlarm = alarm;

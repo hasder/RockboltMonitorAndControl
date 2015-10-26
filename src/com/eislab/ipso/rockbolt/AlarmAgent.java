@@ -58,7 +58,7 @@ public class AlarmAgent implements Observer, Runnable {
 		turnOffAllAlarms = new CoapClient("coap://" + rockboltDevice.device + "/3311/2/5850");
 		turnOffAllAlarms.put("false", 0);
 		turnOffAllAlarms = new CoapClient("coap://" + rockboltDevice.device + "/3311/3/5850");
-		turnOffAllAlarms.put("false", 0);
+		turnOffAllAlarms.put("true", 0);
 		turnOffAllAlarms = new CoapClient("coap://" + rockboltDevice.device + "/3311/4/5850");
 		turnOffAllAlarms.put("false", 0);
 	}
@@ -166,11 +166,28 @@ public class AlarmAgent implements Observer, Runnable {
 				Entry<Rockbolt, Integer> entry = it.next();
 				rockbolt = entry.getKey();
 				
-				if(arg1String.startsWith("strain_alarm="))
-					this.spreadAlarm("coap://" + rockbolt.device + "/3311/1/5850", strainAlarm);
-
-				if(arg1String.startsWith("acc_alarm="))
-					this.spreadAlarm("coap://" + rockbolt.device + "/3311/2/5850", accAlarm);
+				
+				if(strainAlarm > 1 || accAlarm > 1) {
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/2/5850", 0);//yellow or orange
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/3/5850", 0);//green
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/1/5850", 1);//red
+				} else if (strainAlarm == 1 || accAlarm == 1) {
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/1/5850", 0);//red
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/3/5850", 0);//green
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/2/5850", 1);//yellow or orange
+				} else {
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/1/5850", 0);//red
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/2/5850", 0);//yellow or orange
+					this.spreadAlarm("coap://" + rockbolt.device + "/3311/3/5850", 1);//green
+				}
+				
+				
+				
+//				if(arg1String.startsWith("strain_alarm="))
+//					this.spreadAlarm("coap://" + rockbolt.device + "/3311/1/5850", strainAlarm);
+//
+//				if(arg1String.startsWith("acc_alarm="))
+//					this.spreadAlarm("coap://" + rockbolt.device + "/3311/2/5850", accAlarm);
 	//			this.spreadAlarm("coap://" + rockbolt.device + "/3311/2/5850", Integer.parseInt(arg1String.substring(arg1String.indexOf("=")+1)));
 			}
 		

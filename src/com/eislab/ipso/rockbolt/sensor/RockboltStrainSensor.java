@@ -90,13 +90,16 @@ public class RockboltStrainSensor extends AbstractSensorClient {
 					e.printStackTrace();
 				}
 				
+				if (strain > 7500) {
+					alarm = 2;
+				}
 				
 				if(prevAlarm != alarm) {
 					prevAlarm = alarm;
 
 					historianAgent.setStrain_alarm(alarm);
-					setChanged();
-					notifyObservers("strain_alarm=" + alarm);
+//					setChanged();
+//					notifyObservers("strain_alarm=" + alarm);
 				}
 				
 				historianAgent.setStrain(strain);

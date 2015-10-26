@@ -36,7 +36,7 @@ public abstract class AbstractSensorClient extends Observable {
 		System.out.println("Observe URI: " + targetURI);
 
 		CoapClient client = new CoapClient(targetURI);
-		client.setTimeout(3000);
+		client.setTimeout(60000);
 		observeRelation = client.observe(new CoapHandler() {
 			
 			@Override
